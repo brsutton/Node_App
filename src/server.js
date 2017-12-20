@@ -23,9 +23,6 @@ const validate = async (request, username, password, h) => {
 
 const main = async () => {
 
-    var hash = Bcrypt.hashSync("Raghava", 10);
-    console.log(hash);
-
     const server = Hapi.server({ port: 8080 });
 
     await server.register(require('hapi-auth-basic'));
