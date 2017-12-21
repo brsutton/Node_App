@@ -3,10 +3,10 @@ const getUserFromDatabase = require('../src/getUsersFromDatabase.js');
 
 exports.validate = async (request, username, password, h) => {
 
-    const user = await getUserFromDatabase.getUserFromDatabase(username);
-
+    const data = await getUserFromDatabase.getUserFromDatabase(username);
+    const user = data.Item;
+    
     if (!user) {
-        console.log(user);
         return { credentials: null, isValid: false };
     }
 

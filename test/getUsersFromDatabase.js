@@ -7,9 +7,9 @@ describe('Get Users From Database', async ()=> {
         const user = getUserFromDatabase.getUserFromDatabase('brian')
         .then(function(data){
            // console.log(data);
-            assert.equal('brian', data.username );
-            assert.equal('Brian', data.firstName);
-            assert.equal('Sutton', data.lastName);
+            assert.equal('brian', data.Item.username );
+            assert.equal('Brian', data.Item.firstName);
+            assert.equal('Sutton', data.Item.lastName);
         })
         .catch(function(err){
             console.log(err);
