@@ -26,6 +26,7 @@
     "hapi-auth-basic": "^5.0.0"
   },
   "devDependencies": {
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.3"
   }
 }
