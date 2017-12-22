@@ -2,32 +2,13 @@ const Bcrypt = require('bcrypt');
 const Hapi = require('hapi');
 const getUserFromDatabase = require('../src/getUsersFromDatabase.js');
 const config = require('../config/config.js');
-
-const validate = async (request, username, password, h) => {
-
-    const data = await getUserFromDatabase.getUserFromDatabase(username);
-    const user = data.Item;
-
-    if (!user) {
-        console.log(user);
-        return { credentials: null, isValid: false };
-    }
-
-    const isValid = await Bcrypt.compareSync(password, user.password);
-    const credentials = {
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName
-    };
-
-    return { isValid, credentials };
-};
+const validate = require('../src/validate.js');
 
 const main = async () => {
-    
+
     const server = Hapi.server({ port: config.port });
     await server.register(require('hapi-auth-basic'));
-    server.auth.strategy('simple', 'basic', { validate });
+    server.auth.strategy('simple', 'basic', { validate: validate.validate });
     server.auth.default('simple');
 
     server.route({
